@@ -17,7 +17,7 @@ const lista = ['Rick Sanchez', 'Morty Smith', 'Summer Smith']
 
 // Read all -> [GET] /item
 app.get('/item', function(req, res) {
-  // Envio da lista inteira como resposta
+  // Envio da lista inteira como resposta HTTP
   res.send(lista)
 })
 
@@ -27,11 +27,29 @@ app.get('/item/:id', function(req, res) {
   // Acesso o ID no parâmetro de rotas
   const id = req.params.id
 
-  //Acesso item na Lista baseado no ID recebido
+  // Acesso item na Lista baseado no ID recebido
   const item = lista[id]
 
-  //Envio do item obtido como resposta HTTP
+  // Envio do item obtido como resposta HTTP
   res.send(item)
+})
+
+// Sinalizamos que o corpo da requisição está em JSON
+app.use(express.json())
+
+// Create -> [POST] /item
+app.post('/item', function(req, res) {
+  // Extraimos o corpo da requisição
+  const body = req.body
+
+  // Pegamos o nome (string) que foi enviado dentro do corpo
+  const item = body.nome
+
+  // Colocamos o nome dentro da lista de itens
+  lista.push(item)
+
+  // Enviamos uma resposta de sucesso
+  res.send('Item adicionado com sucesso!')
 })
 
 
