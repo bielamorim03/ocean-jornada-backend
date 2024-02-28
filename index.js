@@ -88,12 +88,12 @@ async function main() {
 
 
     // Delete -> [DELETE] /item/:id
-    app.delete('/item:id', async function (req, res) {
+    app.delete('/item/:id', async function (req, res) {
       // Pegamos o ID da rota
       const id = req.params.id
 
       // Realizamos a operação de deleteOne
-      await collection.deleteOne( { _id: new Object(id) })
+      await collection.deleteOne( { _id: new ObjectId(id) })
 
       // Enviamos uma mensagem de sucesso
       res.send('Item removido com sucesso! ')
