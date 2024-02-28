@@ -46,7 +46,7 @@ async function main() {
 
     // Acesso item na Lista baseado no ID recebido
     const item = await collection.findOne({
-      _id: new ObjectId()
+      _id: new ObjectId(id)
     })
 
     // Envio do item obtido como resposta HTTP
