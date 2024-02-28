@@ -1,5 +1,5 @@
 const express = require('express')
-const { MongoClient } = require('mongodb')
+const { MongoClient, ObjectId } = require('mongodb')
 
 const dbUrl = 'mongodb+srv://admin:JG4RqcPPtxXtDIgy@cluster0.1imo7ys.mongodb.net'
 const dbName = 'OceanJornadaBackend'
@@ -40,12 +40,14 @@ async function main() {
 
 
   // Read By ID -> [GET] /item/:id
-  app.get('/item/:id', function (req, res) {
+  app.get('/item/:id', async function (req, res) {
     // Acesso o ID no parâmetro de rotas
     const id = req.params.id
 
     // Acesso item na Lista baseado no ID recebido
-    const item = lista[id]
+    const item = await collection.findOne({
+      _id: new ObjectId()
+    })
 
     // Envio do item obtido como resposta HTTP
     res.send(item)
